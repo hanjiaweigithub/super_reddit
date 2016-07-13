@@ -26,8 +26,11 @@ class CreateSubredditView(View):
             logger.error('Missing parameter')
             return JsonResponse(status=400, data={'status': 'Missing parameter'}, safe=False)
 
-        # STUDENT TODO | Create subreddit from parameters
-
+        # STUDENT TODO | Create subreddit from paramet
+        newtitle = input_data['title']
+        newdescription = input_data['description']
+        instance = Subreddit(title=newtitle,description=newdescription)
+        instance.save()
         return JsonResponse(status=200, data={'status': 'OK'}, safe=False)
 
 
@@ -46,10 +49,14 @@ class ListSubredditView(View):
             data={
                 'status': 'OK',
                 # STUDENT TODO | Return title and description as well
+                
+                
                 'subreddits': [
                     {
                         'id': subreddit.id,
                         'created': subreddit.created,
+                        'title': subreddit.title,
+                        'description': subreddit.description,
                     } for subreddit in Subreddit.objects.all()
                 ]
             }
