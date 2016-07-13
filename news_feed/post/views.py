@@ -52,6 +52,7 @@ class ListPostView(View):
     """
 
     def get(self, request, subreddit_scope, *args, **kwargs):
+
         if subreddit_scope == 'global':
             posts = Post.objects.all()
         else:
@@ -68,7 +69,7 @@ class ListPostView(View):
                         'created': post.created,
                         'title':post.title,
                         'content':post.content,
-                    } for post in posts
+                    } for post in posts.filter(title__iexact='bad')
                 ]
             }
         )
