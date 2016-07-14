@@ -1,4 +1,5 @@
 var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
+
 .config(function($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
@@ -72,10 +73,26 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
                 getPosts(); // Refresh visible posts
             }).$promise;
         };
-
-
     });
 
+    var filter = false
+    $scope.filterout = function(e){
+        if(filter)
+            return e.likes<10;
+        else
+            return e;
+    }
+    $scope.changeFilter = function(){filter = !filter;}
+    
+    var order = false
+    $scope.orderBy = function(){
+        if(order)
+            return 'likes';
+        else
+            return '';
+    }
+    $scope.changeOrder = function(){order = !order;}
+    
     var getSubreddits = function(){
         return SubredditResource.Subreddit.get(function(result) {
             $scope.subreddits = result.subreddits;
