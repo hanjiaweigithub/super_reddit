@@ -34,10 +34,17 @@ class CreatePostView(View):
             subreddit = get_object_or_404(Subreddit, id=subreddit_scope)
 
         # STUDENT TODO | Create post from parameters
-        newtitle = input_data['title']
-        newcontent = input_data['content']
-        instance = Post(title=newtitle,content=newcontent,subreddit=subreddit)
-        instance.save();
+        if input_data['id'] == -1:
+            newtitle = input_data['title']
+            newcontent = input_data['content']
+            instance = Post(title=newtitle,content=newcontent,likes=0,subreddit=subreddit)
+            instance.save();
+        else:    
+            post = get_object_or_404(Post, id=input_data['id'])
+            i = post.likes
+            i = i + 1
+            post.likes = i
+            post.save()
         return JsonResponse(status=200, data={'status': 'OK'}, safe=False)
 
 
@@ -65,6 +72,7 @@ class ListPostView(View):
                 # STUDENT TODO | Return title and content as well
                 'posts': [
                     {
+                        'likes': post.likes,
                         'id': post.id,
                         'created': post.created,
                         'title':post.title,

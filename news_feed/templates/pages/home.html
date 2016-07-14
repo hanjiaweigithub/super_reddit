@@ -7,13 +7,16 @@
             <div class="post" ng-repeat="post in posts">
                 <heading ng-bind="post.title"></heading>
                 <content ng-bind="post.content"></content>
-                <button class="btn">like</button>
+                <button ng-click="createPost(post.title, post.content, post.id)" type="submit" class="btn">like</button>
+                <br/>
+                <content ng-bind="post.likes"></content>
+                <br/>
                  <hr>
             </div>
             <div class="navbar-form">
                 <input type="text" ng-model="input_post.title">
                 <input type="text" ng-model="input_post.content">
-                <button ng-click="createPost(input_post.title, input_post.content)" type="submit" class="btn">Create Post</button>
+                <button ng-click="createPost(input_post.title, input_post.content, -1)" type="submit" class="btn">Create Post</button>
                 <button class="btn">filter</button>
                 <button class="btn">order</button>
             </div>

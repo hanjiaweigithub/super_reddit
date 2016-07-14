@@ -63,9 +63,9 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
     // Initialize
     self.posts = [];
     getPosts().then(function() {
-        $scope.createPost = function(title, content) {
+        $scope.createPost = function(title, content, id) {
             return PostResource.Post.create(
-                {'subreddit': currentSubreddit, 'title': title, 'content': content},
+                {'subreddit': currentSubreddit, 'title': title, 'content': content, 'id': id},
                 function(result) {
                 // TODO | Highlight box red and alert user on error
                 console.log(result);
