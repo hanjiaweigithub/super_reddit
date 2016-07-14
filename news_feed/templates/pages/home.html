@@ -3,11 +3,12 @@
 {% block content %}
 <div class="row" ng-controller="HomepageController">
     <div class="posts">
+    <b>{{count}}</b>
         <ul>
             <div class="post" ng-repeat="post in posts | filter:filterout  | orderBy:orderBy()">
                 <heading ng-bind="post.title"></heading>
                 <content ng-bind="post.content"></content>
-                <button ng-click="createPost(post.title, post.content, post.id)" type="submit" class="btn">like</button>
+                <button ng-click="clickLike(post.title, post.content, post.id)" type="submit" class="btn">like</button>
                 <br/>
                 <content ng-bind="post.likes"></content>
                 <br/>
@@ -16,7 +17,7 @@
             <div class="navbar-form">
                 <input type="text" ng-model="input_post.title">
                 <input type="text" ng-model="input_post.content">
-                <button ng-click="createPost(input_post.title, input_post.content, -1)" type="submit" class="btn">Create Post</button>
+                <button ng-click="clickLike(input_post.title, input_post.content, -1)" type="submit" class="btn">Create Post</button>
                 <button ng-click="changeFilter()" class="btn">filter</button>
                 <button ng-click="changeOrder()" class="btn">order</button>
             </div>

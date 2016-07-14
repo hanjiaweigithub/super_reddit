@@ -39,6 +39,7 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
     self.getPosts = function() {
         return PostResource.Post.get({'subreddit': currentSubreddit}, function(result) {
             $scope.posts = result.posts;
+            $scope.count = result.posts.count;
         }).$promise;
     };
   
@@ -75,23 +76,40 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
         };
     });
 
-    var filter = false
+    var filter = false;
     $scope.filterout = function(e){
         if(filter)
             return e.likes<10;
         else
             return e;
-    }
+    };
     $scope.changeFilter = function(){filter = !filter;}
     
-    var order = false
+    var order = false;
     $scope.orderBy = function(){
         if(order)
             return 'likes';
         else
             return '';
-    }
-    $scope.changeOrder = function(){order = !order;}
+    };
+    $scope.changeOrder = function(){order = !order;};
+    
+    //$scope.getCount = function(){return $scope.count = $scope.posts.count;}
+    
+    var previousTime = null;
+    $scope.clickLike = function(title, content, id){
+        var myDate = new Date();
+        if(myDate.getSeconds()-previousTime > 1) {
+            previousTime = myDate.getSeconds();
+            return PostResource.Post.create(
+                {'subreddit': currentSubreddit, 'title': title, 'content': content, 'id': id},
+                function(result) {
+                // TODO | Highlight box red and alert user on error
+                console.log(result);
+                getPosts(); // Refresh visible posts
+            }).$promise;
+        }
+    };
     
     var getSubreddits = function(){
         return SubredditResource.Subreddit.get(function(result) {
