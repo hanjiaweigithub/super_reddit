@@ -28,8 +28,10 @@
         </div>
         <uib-tabset vertical="true" type="pills">
             <uib-tab heading="global" select="refreshPosts('global')"></uib-tab>
-            <uib-tab heading="{[{subreddit.title}]}" select="refreshPosts(subreddit.id)" ng-repeat="subreddit in subreddits">{[{ subreddit.description }]} <br/> {[{ subreddit.popularity }]}</uib-tab>
+            <uib-tab heading="{[{subreddit.title}]}" select="refreshPosts(subreddit.id)" ng-repeat="subreddit in subreddits">{[{ subreddit.description }]} <br/> {[{ subreddit.popularity }]} <br/><a>a</a></uib-tab>
         </uib-tabset>
+        <button class="btn">order by name</button>
+        <button class="btn">order by popularity</button>
     </aside>
 </div>
 {% endblock content %}
