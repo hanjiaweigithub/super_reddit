@@ -7,25 +7,29 @@
             <div class="post" ng-repeat="post in posts">
                 <heading ng-bind="post.title"></heading>
                 <content ng-bind="post.content"></content>
+                <button class="btn">like</button>
+                 <hr>
             </div>
             <div class="navbar-form">
                 <input type="text" ng-model="input_post.title">
                 <input type="text" ng-model="input_post.content">
                 <button ng-click="createPost(input_post.title, input_post.content)" type="submit" class="btn">Create Post</button>
+                <button class="btn">filter</button>
+                <button class="btn">order</button>
             </div>
         </ul>
     </div>
     <aside class="subreddits">
-        <uib-tabset vertical="true" type="pills">
-            <uib-tab heading="global" select="refreshPosts('global')"></uib-tab>
-            <uib-tab heading="{[{subreddit.title}]}" select="refreshPosts(subreddit.id)" ng-repeat="subreddit in subreddits">{[{ subreddit.description }]} <br/> {[{ subreddit.popularity }]}</uib-tab>
-        </uib-tabset>
-        <div class="navbar-form">
+    	<div class="navbar-form">
             <input type="text" ng-model="input_sub.title">
             <input type="text" ng-model="input_sub.description">
             <input type="text" ng-model="input_sub.popularity">
             <button ng-click="createSubreddit(input_sub.title, input_sub.description,input_sub.popularity)" type="submit" class="btn">Create Subreddit</button>
         </div>
+        <uib-tabset vertical="true" type="pills">
+            <uib-tab heading="global" select="refreshPosts('global')"></uib-tab>
+            <uib-tab heading="{[{subreddit.title}]}" select="refreshPosts(subreddit.id)" ng-repeat="subreddit in subreddits">{[{ subreddit.description }]} <br/> {[{ subreddit.popularity }]}</uib-tab>
+        </uib-tabset>
     </aside>
 </div>
 {% endblock content %}
