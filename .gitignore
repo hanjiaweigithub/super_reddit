@@ -75,5 +75,5 @@ news_feed/media/
 
 .env
 tags
-news_feed/static/bower_components/
+#news_feed/static/bower_components/
 db.sqlite3
