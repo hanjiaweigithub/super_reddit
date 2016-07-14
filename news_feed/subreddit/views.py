@@ -29,7 +29,8 @@ class CreateSubredditView(View):
         # STUDENT TODO | Create subreddit from paramet
         newtitle = input_data['title']
         newdescription = input_data['description']
-        instance = Subreddit(title=newtitle,description=newdescription)
+        newpopularity = input_data['popularity']
+        instance = Subreddit(title=newtitle,description=newdescription,popularity=newpopularity)
         instance.save()
         return JsonResponse(status=200, data={'status': 'OK'}, safe=False)
 
@@ -57,6 +58,7 @@ class ListSubredditView(View):
                         'created': subreddit.created,
                         'title': subreddit.title,
                         'description': subreddit.description,
+                        'popularity':subreddit.popularity,
                     } for subreddit in Subreddit.objects.all()
                 ]
             }

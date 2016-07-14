@@ -69,7 +69,7 @@ class ListPostView(View):
                         'created': post.created,
                         'title':post.title,
                         'content':post.content,
-                    } for post in posts.filter(title__iexact='bad')
+                    } for post in posts.exclude(title__iexact = 'bad')
                 ]
             }
         )

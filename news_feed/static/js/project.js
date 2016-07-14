@@ -70,9 +70,9 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
     // Initialize
     $scope.subreddits = [];
     getSubreddits().then(function() {
-        $scope.createSubreddit = function(title, description) {
+        $scope.createSubreddit = function(title, description,popularity) {
             return SubredditResource.Subreddit.create(
-                {'title': title, 'description': description},
+                {'title': title, 'description': description,'popularity':popularity},
                 function(result) {
                     // TODO | Highlight box red and alert user on error
                     console.log(result);
