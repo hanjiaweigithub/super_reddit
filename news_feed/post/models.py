@@ -12,6 +12,7 @@ class Post(models.Model):
     title = models.TextField(null=False, blank=False)
     content = models.TextField(null=False, blank=False)
     likes = models.IntegerField(null=False, blank=False)
+    path = models.TextField(blank=False)
     subreddit = models.ForeignKey('subreddit.Subreddit', related_name='posts', null=True, blank=True)
 
     def __unicode__(self):

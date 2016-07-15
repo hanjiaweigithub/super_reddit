@@ -37,7 +37,8 @@ class CreatePostView(View):
         if input_data['id'] == -1:
             newtitle = input_data['title']
             newcontent = input_data['content']
-            instance = Post(title=newtitle,content=newcontent,likes=0,subreddit=subreddit)
+            newpath = input_data['path']
+            instance = Post(title=newtitle,content=newcontent,likes=0,path=newpath,subreddit=subreddit)
             instance.save();
         else:    
             post = get_object_or_404(Post, id=input_data['id'])
@@ -72,6 +73,7 @@ class ListPostView(View):
                 # STUDENT TODO | Return title and content as well
                 'posts': [
                     {
+                        'path': post.path,
                         'likes': post.likes,
                         'id': post.id,
                         'created': post.created,

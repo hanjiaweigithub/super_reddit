@@ -96,12 +96,12 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
     //$scope.getCount = function(){return $scope.count = $scope.posts.count;}
     
     var previousTime = null;
-    $scope.clickLike = function(title, content, id){
+    $scope.clickLike = function(title, content, id, path){
         var myDate = new Date();
         if(myDate.getSeconds()-previousTime > 1) {
             previousTime = myDate.getSeconds();
             return PostResource.Post.create(
-                {'subreddit': currentSubreddit, 'title': title, 'content': content, 'id': id},
+                {'subreddit': currentSubreddit, 'title': title, 'content': content, 'id': id, 'path': path},
                 function(result) {
                 // TODO | Highlight box red and alert user on error
                 console.log(result);
