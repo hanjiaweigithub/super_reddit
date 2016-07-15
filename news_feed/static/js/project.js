@@ -40,6 +40,21 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
             $scope.posts = result.posts;
         }).$promise;
     };
+  
+    var orderBy=true;
+    $scope.orderChange = function(){
+        if(orderBy)
+            return 'title';
+        else
+            return '-popularity';
+    }
+
+
+    $scope.orderByName = function(){orderBy=true;}
+    $scope.orderByPopularity = function(){orderBy=false;}
+
+    
+
     $scope.refreshPosts = function(id) {
         currentSubreddit = id;
         self.getPosts();
@@ -57,9 +72,9 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
                 getPosts(); // Refresh visible posts
             }).$promise;
         };
+
+
     });
-
-
 
     var getSubreddits = function(){
         return SubredditResource.Subreddit.get(function(result) {
@@ -80,5 +95,20 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
                 });
         };
     });
+
+}])
+.controller('TranslationController',
+            ['$scope',
+            function($scope) {
+
+$scope.myField = "SupperReddit is a school project of FRIENDS,a non-profit team";
+    
+    $scope.chineseText = function(){
+        $scope.myField = "超级莱迪特是非盈利团队“六人行”的学校项目";
+    }
+
+     $scope.englishText = function(){
+        $scope.myField = "SupperReddit is a school project of FRIENDS,a non-profit team";
+    }
 
 }]);

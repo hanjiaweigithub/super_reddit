@@ -28,10 +28,26 @@
         </div>
         <uib-tabset vertical="true" type="pills">
             <uib-tab heading="global" select="refreshPosts('global')"></uib-tab>
-            <uib-tab heading="{[{subreddit.title}]}" select="refreshPosts(subreddit.id)" ng-repeat="subreddit in subreddits">{[{ subreddit.description }]} <br/> {[{ subreddit.popularity }]} <br/><a>a</a></uib-tab>
+            <uib-tab id="redditList" heading="{[{subreddit.title}]}" select="refreshPosts(subreddit.id)" ng-repeat="subreddit in subreddits|orderBy:orderChange()">{[{ subreddit.description }]} <br/> {[{ subreddit.popularity }]} <br/>{[{ subreddit.count }]} <br/></uib-tab>
         </uib-tabset>
-        <button class="btn">order by name</button>
-        <button class="btn">order by popularity</button>
+        <button id="nameButton" ng-click="orderByName()" class="btn">order by name</button>
+        <button id="popularityButton" ng-click="orderByPopularity()" class="btn">order by popularity</button>
     </aside>
+
 </div>
+
+    <div class="row" ng-controller="TranslationController">
+
+
+      <p style="text-align: center"> 
+        
+      </p>
+      <p style="text-align: center">
+        <label>{[{myField}]}</label> <br/>
+        <input type="button" name="button" id="chinese" value="中文" ng-click="chineseText()" >
+        <input type="button" name="button" id="english" value="English" ng-click="englishText()">
+      </p>
+    </div>
+    
+
 {% endblock content %}
