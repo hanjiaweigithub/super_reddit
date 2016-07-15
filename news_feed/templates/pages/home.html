@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row" ng-controller="HomepageController">
     <div class="posts">
-    <b>{{count}}</b>
+        <label>{[{posts.length}]}</label>
         <ul>
             <div class="post" ng-repeat="post in posts | filter:filterout  | orderBy:orderBy()">
                 <heading ng-bind="post.title"></heading>

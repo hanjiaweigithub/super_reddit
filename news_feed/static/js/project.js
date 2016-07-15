@@ -39,7 +39,6 @@ var app = angular.module('NewsFeed', ['ngResource', 'ui.bootstrap'])
     self.getPosts = function() {
         return PostResource.Post.get({'subreddit': currentSubreddit}, function(result) {
             $scope.posts = result.posts;
-            $scope.count = result.posts.count;
         }).$promise;
     };
   
